@@ -10,18 +10,6 @@ import client from "../db";
 const QueryRoot = new GraphQLObjectType({
   name: "Query",
   fields: () => ({
-    customers: {
-      type: new GraphQLList(cType.Customer),
-      resolve: async () => {
-        return (
-          await client.query(
-            `SELECT c.*, csi.service_interest_id, si.name AS service_interest FROM customers AS c 
-            INNER JOIN customer_service_interest AS csi ON csi.customer_id = c.id 
-            INNER JOIN service_interest AS si ON si.id = csi.service_interest_id`
-          )
-        ).rows;
-      },
-    },
     leads: {
       type: new GraphQLList(cType.serviceLead),
       resolve: async () => {
