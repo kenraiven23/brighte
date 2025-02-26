@@ -1,6 +1,7 @@
 import { GraphQLSchema } from "graphql";
 import { createHandler } from "graphql-http/lib/use/express";
 import express from "express";
+import db from "./db";
 import QueryRoot from "./customer/query";
 import MutationRoot from "./customer/mutation";
 import { defaultTables } from "./db/defaultTable";
@@ -17,6 +18,7 @@ app.use(
   "/graphql",
   createHandler({
     schema: schema,
+    context: { db },
   })
 );
 
